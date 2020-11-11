@@ -8,16 +8,16 @@ import lombok.Setter;
 public class Cliente {
 	
 	private String nome;
-	private String idade;
-	private int cpf;
+	private int idade;
+	private String cpf;
 	private String endereco;
 	
-	public Cliente(String nome, String idade, int cpf, String endereco) {
+	public Cliente(String nome, int idade, String cpf, String endereco) {
 		super();
-		this.nome = nome;
-		this.idade = idade;
-		this.cpf = cpf;
-		this.endereco = endereco;
+		setNome(nome);
+		setIdade(idade);
+		setCpf(cpf);
+		setEndereco(endereco);		
 	}
 	
 	@Override

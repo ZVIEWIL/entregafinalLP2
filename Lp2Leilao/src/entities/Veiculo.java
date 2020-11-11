@@ -15,10 +15,10 @@ public class Veiculo extends Produto{
 	// constructor
 	public Veiculo(int idProduto, float lanceMinimo, String desc, int idLeilao, int ano, String modelo, String cor, String tipo) {
 		super(idProduto, lanceMinimo, desc, idLeilao);
-		this.ano = ano;
-		this.modelo = modelo;
-		this.cor = cor;
-		this.tipo = tipo;
+		setAno(ano);
+		setModelo(modelo);
+		setCor(cor);
+		setTipo(tipo);
 		
 	}	
 }

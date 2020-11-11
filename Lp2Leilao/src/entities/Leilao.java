@@ -18,12 +18,12 @@ public class Leilao {
 	public Leilao(Integer idLeilao, Integer loteProdutos, Date dataOcorrencia, String endereco, String status,
 			String banco) {
 		super();
-		this.idLeilao = idLeilao;
-		this.loteProdutos = loteProdutos;
-		this.dataOcorrencia = dataOcorrencia;
-		this.endereco = endereco;
-		this.status = status;
-		this.banco = banco;
+		setIdLeilao(idLeilao);
+		setLoteProdutos(loteProdutos);
+		setDataOcorrencia(dataOcorrencia);
+		setEndereco(endereco);
+		setStatus(status);
+		setBanco(banco);		
 	}
 
 	@Override

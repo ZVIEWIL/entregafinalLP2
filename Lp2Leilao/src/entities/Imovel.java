@@ -15,9 +15,9 @@ public class Imovel extends Produto {
 	public Imovel(int idProduto, float lanceMinimo, String desc, int idLeilao, String cep, int numero, float area,
 			String tipo) {
 		super(idProduto, lanceMinimo, desc, idLeilao);
-		this.cep = cep;
-		this.numero = numero;
-		this.area = area;
-		this.tipo = tipo;
+		setCep(cep);
+		setNumero(numero);
+		setArea(area);
+		setTipo(tipo);
 	}
 }

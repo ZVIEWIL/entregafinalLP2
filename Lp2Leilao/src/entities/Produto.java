@@ -14,9 +14,9 @@ public class Produto {
 	// constructor
 	public Produto(int idProduto, float lanceMinimo, String desc, int idLeilao) {
 		super();
-		this.idProduto = idProduto;
-		this.lanceMinimo = lanceMinimo;
-		this.desc = desc;
-		this.idLeilao = idLeilao;
+		setIdProduto(idProduto);
+		setLanceMinimo(lanceMinimo);
+		setDesc(desc);
+		setIdLeilao(idLeilao);
 	}
 }
