@@ -9,6 +9,7 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 import model.ModelW;
+import model.ModelD;
 
 public class LeilaoApplication {
 	
@@ -18,6 +19,7 @@ public class LeilaoApplication {
 	 
 	public static void main(String[] args) {
 		ModelW model = new ModelW();
+		ModelD model2 = new ModelD();
 		
 		
 		
@@ -26,10 +28,10 @@ public class LeilaoApplication {
 		int escolha;	    
 	    //Menu *INTERFACE GUI*
 		do {			
-			System.out.println("===============================");
-			System.out.println("===========LEILÃO==============");
-			System.out.println("===============================");				
+			System.out.println("===========  LEILÃO   ===========");
+			System.out.println("\n===== CADASTROS =====");
 			System.out.println(
+<<<<<<< HEAD
 					    "1 - Cadastrar Úsuario"+
 					  "\n2 - Cadastrar Banco"+
 					  "\n3 - Cadastrar Imóvel"+
@@ -37,6 +39,24 @@ public class LeilaoApplication {
 					  "\n5 - Cadastrar Leilão"+
 					  "\n6 - Cadastrar Lote"+
 					  "\n7 - Sair"					  
+=======
+					    "01 - Cadastrar Úsuario"+
+					  "\n02 - Cadastrar Banco"+
+					  "\n03 - Cadastrar Imóvel"+
+					  "\n04 - Cadastrar Veículo"+
+					  "\n05 - Cadastrar Leilão"+
+					  "\n06 - Cadastrar Lote\n"+
+					  "\n===== CONSULTAS ====="+
+					  "\n07 - Consultar Úsuarios"+
+					  "\n08 - Consultar Bancos"+
+					  "\n09 - Consultar Imóveis"+
+					  "\n10 - Consultar Veículos"+
+					  "\n11 - Consultar Leilões"+
+					  
+					  "\n================================="+
+					  "\n99 - Sair"
+					  
+>>>>>>> ae5c812065d1706bd25eb12d2b951fa5cc25e2e7
 	//	            + "\n7 -  Imprimir Clientes"
 	//	            + "\n9 -  Remover Clientes"
 	//	            + "\n10 - Imprimir Imoveis"
@@ -81,22 +101,22 @@ public class LeilaoApplication {
 		        	System.out.println("opção 6");
 		        break;
 		        case 7 :
-		        	System.out.println("opção 7");	        	
+		        	model2.consultarClientes();	        	
 		        break;
 		        case 8 :
-		        	System.out.println("opção 8");
+		        	model2.consultarBancos();
 		        break;
-	//	        case 9 :
-	//	        	model.removerCliente();
-	//	        break;
-	//	        case 10 :
-	//	        	model.imprimirImoveis();
-	//	        break;
-	//	        case 11 :
-	//	        	model.removerImovel();
-	//	        break;
+		        case 9 :
+		        	model2.consultarImoveis();
+		        break;
+		        case 10 :
+		        	model2.consultarVeiculos();
+		        break;
+		        case 11 :
+		        	model2.consultarLeiloes();
+		        break;
 	//	        case 12 :
-	//	        	model.imprimirVeiculos();
+	//	        	model2.consultarClientes();
 	//	        break;
 	//	        case 13 :
 	//	        	model.removerVeiculo();
@@ -143,7 +163,7 @@ public class LeilaoApplication {
 		        default:
 		        
 		        break;
-	    }}while(escolha!= 0);
+	    }}while(escolha!= 99);
 	}
 
 }
