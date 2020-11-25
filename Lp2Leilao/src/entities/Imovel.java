@@ -12,8 +12,7 @@ public class Imovel extends Produto {
 	public String tipo;
 	
 	//constructor
-	public Imovel(int idProduto, float lanceMinimo, String desc, int idLeilao, String cep, int numero, float area,
-			String tipo) {
+	public Imovel(int idProduto, float lanceMinimo, String desc, int idLeilao,String cep, int numero, float area, String tipo) {
 		super(idProduto, lanceMinimo, desc, idLeilao);
 		setCep(cep);
 		setNumero(numero);

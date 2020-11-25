@@ -23,9 +23,7 @@ public class LeilaoApplication {
 		
 //		@SuppressWarnings("unused")
 //		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		int escolha;
-		
-	    
+		int escolha;	    
 	    //Menu *INTERFACE GUI*
 		do {			
 			System.out.println("===============================");
@@ -38,8 +36,7 @@ public class LeilaoApplication {
 					  "\n4 - Cadastrar Veículo"+
 					  "\n5 - Cadastrar Leilão"+
 					  "\n6 - Cadastrar Lote"+
-					  "\n7 - Sair"
-					  
+					  "\n7 - Sair"					  
 	//	            + "\n7 -  Imprimir Clientes"
 	//	            + "\n9 -  Remover Clientes"
 	//	            + "\n10 - Imprimir Imoveis"
@@ -72,7 +69,7 @@ public class LeilaoApplication {
 		        	model.cadastrarBanco();
 		        break;
 		        case 3 :
-		        	System.out.println("opção 3");
+		        	model.cadastrarImovel();
 		        break;    
 		        case 4 :
 		        	System.out.println("opção 4");
