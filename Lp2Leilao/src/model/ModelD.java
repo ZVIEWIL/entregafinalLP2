@@ -17,15 +17,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ModelD {
-	//INSTANCIANDO AS CLASSES (LISTAS) 
-		private static List<Cliente> clientes;
-		private static List<Imovel> imoveis;
-		private static List<Veiculo> veiculos;
-		private static List<Banco> bancos;
-		static List<Leilao> leiloes;
-		static List<Lance> lances;
+	int idProduto;
+	//INSTANCIANDO AS LISTAS 
+	private static List<Cliente> clientes;
+	private static List<Imovel> imoveis;
+	private static List<Veiculo> veiculos;
+	private static List<Banco> bancos;
+	static List<Leilao> leiloes;
+	static List<Lance> lances;
 
-		//CRIANDO ARRAYLISTS DAS LISTAS INSTANCIADAS
+		//CRIANDO ARRAYLISTS
 		public ModelD() {
 			clientes = new ArrayList<>();
 			imoveis = new ArrayList<>();
