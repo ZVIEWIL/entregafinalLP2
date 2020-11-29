@@ -7,12 +7,18 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 import model.Model;
 
+<<<<<<< HEAD
+=======
+import model.Model;
+
+>>>>>>> 0f3f14d146738cf9d65f56122cef88ea39e9cf8e
 
 public class LeilaoApplication {
 	
 	
 	static Scanner leitor = new Scanner (System.in);
 	 
+<<<<<<< HEAD
 	public static void main(String[] args) throws ParseException {
 		Model model = new Model();
 		int escolha;	    
@@ -55,6 +61,35 @@ public class LeilaoApplication {
 	//	            + "\n21 - Imprimir Lances por Cliente"
 	//	            + "\n22 - Imprimir Lote específico"
 					);
+=======
+	public static void main(String[] args) {
+		Model model = new Model();
+		
+		
+		int escolha;	    
+	    //Menu da Interface
+		do {
+			System.out.println("================================");
+			System.out.println("===========  LEILÃO  ===========");
+			System.out.println("================================");
+			System.out.println("\n========= CADASTROS ==========");
+			System.out.println(			  
+					    "1 - Cadastrar Úsuario"+
+					  "\n2 - Cadastrar Banco"+
+					  "\n3 - Cadastrar Imóvel"+
+					  "\n4 - Cadastrar Veículo"+
+					  "\n5 - Cadastrar Leilão"+
+					  "\n6 - Cadastrar Lote\n"+
+					  "\n========= CONSULTAS ========="+
+					  "\n7 - Consultar Úsuarios"+
+					  "\n8 - Consultar Bancos"+
+					  "\n9 - Consultar Imóveis"+
+					  "\n10 - Consultar Veículos"+
+					  "\n11 - Consultar Leilões"+
+					  "\n================================="+
+					  "\n99 - Sair"	            
+		            );
+>>>>>>> 0f3f14d146738cf9d65f56122cef88ea39e9cf8e
 			System.out.print("\nESCOLHA UMA OPÇÃO: ");       
 			escolha = leitor.nextInt();
 //			for (int i = 0; i < 40; ++i) System.out.println ();
@@ -75,6 +110,7 @@ public class LeilaoApplication {
 		        case 5 :
 		        	model.cadastrarLeilao();
 		        break;
+<<<<<<< HEAD
 		        case 11 :
 		        	model.consultarClientes();
 		        break;
@@ -139,6 +175,27 @@ public class LeilaoApplication {
 	//	        case 26:
 	//	        	model.alterarVeiculo();
 	//		        break;
+=======
+		        case 6 :
+		        	System.out.print("Em construção");
+		        break;
+		        case 7 :
+		        	model.consultarClientes();	        	
+		        break;
+		        case 8 :
+		        	model.consultarBancos();
+		        break;
+		        case 9 :
+		        	model.consultarImoveis();
+		        break;
+		        case 10 :
+		        	model.consultarVeiculos();
+		        break;
+		        case 11 :
+		        	model.consultarLeiloes();
+		        break;
+
+>>>>>>> 0f3f14d146738cf9d65f56122cef88ea39e9cf8e
 		        default:
 		        
 		        break;
