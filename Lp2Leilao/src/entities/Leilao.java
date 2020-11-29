@@ -8,14 +8,14 @@ import java.util.Date;
 @Getter
 public class Leilao {
 
-	private Integer idLeilao;
-	private Integer loteProdutos;
+	private int idLeilao;
+	private int loteProdutos;
 	private Date dataOcorrencia;
 	private String endereco;
 	private String status;
 	private String banco;
 	
-	public Leilao(Integer idLeilao, Integer loteProdutos, Date dataOcorrencia, String endereco, String status,
+	public Leilao(int idLeilao, int loteProdutos, Date dataOcorrencia, String endereco, String status,
 			String banco) {
 		super();
 		setIdLeilao(idLeilao);

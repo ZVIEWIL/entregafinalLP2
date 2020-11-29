@@ -6,13 +6,17 @@ import lombok.Setter;
 @Getter
 
 public class Lance {
-	Cliente idPessoa;	
-	Double valor;
-	Leilao idLeilao;
+	int idLance;
+	String cpfPessoa;
+	int idLeilao;
+	int idProduto;
+	Double valor;	
 	
-	public Lance (Cliente idPessoa, Double valor, Leilao idLeilao) {
-		setIdPessoa(idPessoa);
+	public Lance (int idLance, String cpfPessoa, int idLeilao, int idProduto, Double valor) {
+		setIdLance(idLance);
+		setCpfPessoa(cpfPessoa);		
+		setIdLeilao(idLeilao);
+		setIdProduto(idProduto);
 		setValor(valor);
-		setIdLeilao(idLeilao);		
 	}	
 }
