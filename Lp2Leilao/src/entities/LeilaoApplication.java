@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
-import model.ModelW;
+import model.Model;
 
 
 public class LeilaoApplication {
@@ -13,7 +13,7 @@ public class LeilaoApplication {
 	static Scanner leitor = new Scanner (System.in);
 	 
 	public static void main(String[] args) throws ParseException {
-		ModelW model = new ModelW();
+		Model model = new Model();
 		int escolha;	    
 
 		do {			
@@ -43,8 +43,9 @@ public class LeilaoApplication {
 							   "\n19 - Excluir Imoveis"+
 							   "\n20 - Excluir Veiculos"+
 							   "\n21 - Excluir Leilões"+
+							   "\n========FUNCIONALIDADES=========="+
+							   "\n22 - Filtrar Produto por Valor Min/Máx"+
 							   "\n================================="+
-							   
 							   "\n99 - Sair"							   
 
 					);
@@ -114,6 +115,9 @@ public class LeilaoApplication {
 		        break;
 		        case 21 :
 		        	model.deletarVeiculo();
+		        break;
+		        case 22:
+		        	model.filtrarMinMax();
 		        break;
 		        default:
 		        	System.out.print("\nOpção inválida.\n");

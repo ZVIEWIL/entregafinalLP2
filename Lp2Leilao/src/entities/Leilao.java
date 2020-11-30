@@ -9,27 +9,24 @@ import java.util.Date;
 public class Leilao {
 
 	private int idLeilao;
-	private int loteProdutos;
-	private Date dataOcorrencia;
+	private Date dataInicio;
+	private Date dataFim;
 	private String endereco;
-	private String status;
 	private String banco;
 	
-	public Leilao(int idLeilao, int loteProdutos, Date dataOcorrencia, String endereco, String status,
-			String banco) {
+	public Leilao(int idLeilao, Date dataInicio,Date dataFim, String endereco, String banco) {
 		super();
 		setIdLeilao(idLeilao);
-		setLoteProdutos(loteProdutos);
-		setDataOcorrencia(dataOcorrencia);
+		setDataInicio(dataInicio);
+		setDataFim(dataFim);
 		setEndereco(endereco);
-		setStatus(status);
 		setBanco(banco);		
 	}
 
 	@Override
 	public String toString() {
-		return "Leilão [idLeilao=" + idLeilao + ", loteProdutos=" + loteProdutos + ", dataOcorrencia=" + dataOcorrencia
-				+ ", endereco=" + endereco + ", status=" + status + ", banco=" + banco + "]";
+		return "Leilão [idLeilao=" + idLeilao + ", dataInicio=" + dataInicio + ", dataFim=" + dataFim
+				+ ", endereco=" + endereco + ", banco=" + banco + "]";
 	}	
 	
 }
