@@ -1,14 +1,14 @@
 package model;
-
+ 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
-
+ 
 import javax.swing.JOptionPane;
-
+ 
 import entities.Banco;
 import entities.Cliente;
 import entities.Imovel;
@@ -31,7 +31,7 @@ public class Model {
 	int idProduto;
 	int idLance;
 	int idLeilao;		
-	
+ 
 	public Model(){
 		clientes = new ArrayList<>();
 		imoveis = new ArrayList<>();
@@ -43,21 +43,24 @@ public class Model {
 		setIdLance(1);
 		setIdLeilao(1);
 	}	
-	
-	static Scanner leitor = new Scanner (System.in);
+ 
+	static Scanner scanString = new Scanner (System.in);
+	static Scanner scanInt = new Scanner (System.in);
+	static Scanner scanFloat = new Scanner (System.in);
+	static Scanner scanDouble = new Scanner (System.in);
 	SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-	
+ 
 	// funcionalidade 4
 	public void filtrarMinMax() throws ParseException {
 		System.out.println("========PESQUISA POR VALOR MIN/MAX========");
 		System.out.print("Informe o ID do Leilão que deseja buscar: ");
-		int id_leilao = leitor.nextInt();
+		int id_leilao = scanInt.nextInt();
 		for (Leilao Leilao : leiloes) {
 			if(id_leilao == Leilao.getIdLeilao()) {
 				System.out.print("Informe o valor mínimo a ser pesquisado: R$ ");
-				float valor_min = leitor.nextInt();
+				float valor_min = scanFloat.nextFloat();
 				System.out.print("Informe o valor máximo a ser pesquisado: R$ ");
-				float valor_max = leitor.nextInt();
+				float valor_max = scanFloat.nextFloat();
 				for(Veiculo Veiculo : veiculos) {
 					if(id_leilao==Veiculo.getIdLeilao() && valor_min < Veiculo.getLanceMinimo() && valor_max > Veiculo.getLanceMinimo())
 						System.out.println("======================================" +
@@ -91,48 +94,46 @@ public class Model {
 		}
 		System.out.print("Leilão não existe no sistema!\n");	
 	};
-	
+ 
 	// funcionalidade 5
 	public void cadastrarLance() throws ParseException {		
 		System.out.println("========CADASTRO DE LANCE========");
 		int idLance = getIdLance();
 		System.out.print("cpfPessoa: ");
-		String cpfPessoa = leitor.nextLine();		
+		String cpfPessoa = scanString.nextLine();		
 		System.out.print("idLeilao: ");
-		int idLeilao = leitor.nextInt();		
+		int idLeilao = scanInt.nextInt();		
 		System.out.print("idProduto: ");
-		int idProduto = leitor.nextInt();		
+		int idProduto = scanInt.nextInt();		
 		System.out.print("valor: ");
-		Double valor = leitor.nextDouble();		
-		Lance lance = new Lance(idLance, cpfPessoa, idLeilao, idProduto, valor);
+		Double valor = scanDouble.nextDouble();		
+		lances.add(new Lance(idLance, cpfPessoa, idLeilao, idProduto, valor));
 		this.idLance = getIdLance()+1;
 		System.out.println("========LANCE CADASTRADO COM SUCESSO!========\n");		
 	}
-	
+ 
 	// funcionalidade 6
 	public void filtrarLancePorProduto() {
-		System.out.println("========PESQUISAR LANCES/PRODUTO========");
-				
+		System.out.println("========PESQUISAR LANCES POR PRODUTO========");
 		System.out.print("idProduto: ");
-		int idProduto = leitor.nextInt();
+		int idProduto = scanInt.nextInt();
 		for(Lance lance : lances) {
 			if(idProduto == lance.getIdProduto()) {
-				System.out.println("ID: "+lance.getIdLance()+
-								   " CPF: "+lance.getCpfPessoa()+
-								   " LANCE R$"+lance.getValor());
+				System.out.println("ID Lance: "+lance.getIdLance()+
+								   "| CPF: "+lance.getCpfPessoa()+
+								   "| Valor do lance: R$"+lance.getValor());
 			}
 		}
 	}
-
+ 
 	// funcionalidade 7
 	public void checarStatusLeilao() {
 		System.out.println("========CHECAR STATUS LEILÃO========");
 		System.out.print("Informe o ID do Leilão que deseja buscar: ");
-		int id_leilao = leitor.nextInt();
+		int id_leilao = scanInt.nextInt();
 		for (Leilao Leilao : leiloes) {
 			if(id_leilao == Leilao.getIdLeilao()) {
-				Date now_now = new Date();
-				
+				Date now_now = new Date();				
 				String status = "";
 		        if (now_now.after(Leilao.getDataFim())) {
 		     	   status = "Finalizado";
@@ -148,22 +149,22 @@ public class Model {
 		System.out.println("================\nLeilão não encontrado\n================\n");
 	}
 //CLIENTE@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	
+ 
 	public void cadastrarCliente() {
-		System.out.println("========CADASTRO DE CLIENTES========");
+		System.out.println("==========CADASTRO DE CLIENTES=============");
 		System.out.print("NOME CLIENTE: ");
-		String nome = leitor.nextLine();
+		String nome = scanString.nextLine();
 		System.out.print("ENDEREÇO CLIENTE: ");
-		String endereco = leitor.nextLine();
+		String endereco = scanString.nextLine();
 		System.out.print("CPF CLIENTE: ");
-		String cpf = leitor.nextLine();
+		String cpf = scanString.nextLine();
 		System.out.print("IDADE CLIENTE: ");
-		int idade = leitor.nextInt();				
+		int idade = scanInt.nextInt();				
 		Cliente cliente = new Cliente(nome, idade, cpf, endereco);
 		clientes.add(cliente);
-		System.out.println("========CLIENTE CADASTRADO COM SUCESSO!========");		
+		System.out.println("====CLIENTE CADASTRADO COM SUCESSO!=======");		
 	}
-	
+ 
 	public void consultarClientes() {
 		System.out.println("========LISTA DE CLIENTES========");
 		for (Cliente Cliente : clientes) {
@@ -175,11 +176,11 @@ public class Model {
 		}
 		System.out.println("======================================");
 	}
-	
+ 
 	public boolean deletarCliente() {
 		System.out.println("========DELETAR CLIENTE========");
 		System.out.print("CPF do cliente: ");
-		String cpf = leitor.nextLine();
+		String cpf = scanString.nextLine();
 		for (Cliente cliente : clientes) {
 			if (cliente.getCpf().equals(cpf)) {	
 				clientes.remove(cliente);
@@ -189,11 +190,11 @@ public class Model {
 		System.out.print("CLIENTE NÃO ENCONTRADO\n");
 		return false;
 	}
-	
+ 
 	public boolean atualizarCliente() {
 		System.out.println("========EDITAR CLIENTE========");
 		System.out.print("CPF do cliente: ");
-		String doc = leitor.nextLine();
+		String doc = scanString.nextLine();
 		for (Cliente cliente : clientes) {
 			if (cliente.getCpf().equals(doc)) {
 				System.out.print("\nESCOLHA O CAMPO A SER ALTERADO:"
@@ -202,30 +203,30 @@ public class Model {
 					       + "\n3 - CPF"
 					       + "\n4 - IDADE"
 					       + "\nESCOLHA UMA OPÇÃO: ");			
-			int escolha = leitor.nextInt();	
+			int escolha = scanInt.nextInt();	
 			String tipo = new String();
 			switch(escolha){		    	    
 	        case 1 :
 	        	System.out.print("NOME CLIENTE: ");
-	    		String nome = leitor.nextLine();
+	    		String nome = scanString.nextLine();
 	    		cliente.setNome(nome);
 	    		System.out.print("NOME ATUALIZADO ");
 	        break;		        
 	        case 2 :
 	        	System.out.print("ENDEREÇO CLIENTE: ");
-	    		String endereco = leitor.nextLine();
+	    		String endereco = scanString.nextLine();
 	    		cliente.setEndereco(endereco);
 	    		System.out.print("ENDEREÇO ATUALIZADO ");
 	        break;
 	        case 3 :
-	        	String cpf = leitor.nextLine();
+	        	String cpf = scanString.nextLine();
 	    		System.out.print("CPF CLIENTE: ");
 	    		cliente.setEndereco(cpf);
 	    		System.out.print("CPF ATUALIZADO ");
 	        break;    
 	        case 4 :
 	        	System.out.print("IDADE CLIENTE: ");
-	    		int idade = leitor.nextInt();
+	    		int idade = scanInt.nextInt();
 	    		cliente.setIdade(idade);
 	    		System.out.print("IDADE ATUALIZADA ");
 	        break; 
@@ -236,20 +237,20 @@ public class Model {
 		System.out.print("CLIENTE NÃO ENCONTRADO\n");
 		return false;
 	}
-
+ 
 //BANCO@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	
+ 
 	public void cadastrarBanco() {
 		System.out.println("========CADASTRO DE FINANCEIRAS========");
 		System.out.print("NOME FINANCEIRA: ");
-		String nome = leitor.nextLine();
+		String nome = scanString.nextLine();
 		System.out.print("CNPJ FINANCEIRA: ");
-		String cnpj = leitor.nextLine();										
+		String cnpj = scanString.nextLine();										
 		Banco banco = new Banco(nome, cnpj);
 		bancos.add(banco);
 		System.out.println("========FINANCEIRA CADASTRADA COM SUCESSO!========");
 	}
-	
+ 
 	public void consultarBancos() {
 		System.out.println("========LISTA DE BANCOS========");
 		for (Banco Banco : bancos) {
@@ -259,18 +260,18 @@ public class Model {
 		}
 		System.out.println("======================================");
 	}
-	
+ 
 	  public void atualizarBanco() {
 		  System.out.println("========EDITAR INSTITUIÇÃO FINANCEIRA========");
 			System.out.print("CNPJ DO BANCO: ");
-			String cnpj = leitor.nextLine();			
+			String cnpj = scanString.nextLine();			
 				for(Banco banco: bancos ) {
 				if(cnpj.equals(banco.getCnpjFinanceira())) {
 					System.out.println("Insira o nome da Financeira: ");
-					String nomeFinanceira = leitor.nextLine();					
+					String nomeFinanceira = scanString.nextLine();					
 					banco.setNomeFinanceira(nomeFinanceira);					
 					System.out.println("Insira o CNPJ: ");					
-					String cnpjFinanceira = leitor.nextLine();
+					String cnpjFinanceira = scanString.nextLine();
 					banco.setCnpjFinanceira(cnpjFinanceira);					
 					System.out.println("Financeira atualizada!");
 				}else {
@@ -278,11 +279,11 @@ public class Model {
 				}
 			}
 		}
-	  
+ 
 	  public boolean deletarBanco() {
 			System.out.println("========DELETAR BANCO========");
 			System.out.print("CNPJ: ");
-			String cnpj = leitor.nextLine();
+			String cnpj = scanString.nextLine();
 			for (Banco banco : bancos) {
 				if (banco.getCnpjFinanceira().equals(cnpj)) {	
 					bancos.remove(banco);
@@ -292,31 +293,31 @@ public class Model {
 			System.out.print("BANCO NÃO ENCONTRADO\n");
 			return false;
 		}
-	
+ 
 //IMOVEL@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
+ 
 	public void cadastrarImovel() {
 		System.out.println("========CADASTRO DE IMOVEIS========");		
 		int idProduto = this.idProduto;
 		System.out.print("LANCE MINIMO: ");
-		float lanceMinimo = leitor.nextFloat();		
+		float lanceMinimo = scanFloat.nextFloat();		
 		System.out.print("DESCRIÇÃO: ");
-		String desc = leitor.nextLine();		
+		String desc = scanString.nextLine();		
 		System.out.print("ID LEILÃO: ");
-		int idLeilao = leitor.nextInt();		
+		int idLeilao = scanInt.nextInt();		
 		System.out.print("CEP: ");
-		String cep = leitor.nextLine();	
+		String cep = scanString.nextLine();	
 		System.out.print("NUMERO: ");
-		int numero = leitor.nextInt();		
+		int numero = scanInt.nextInt();		
 		System.out.print("AREA: ");
-		float area = leitor.nextFloat();		
+		float area = scanFloat.nextFloat();		
 		System.out.print("\nTIPO: DIGITE UM NUMERO:   "
 				       + "\n1 - APARTAMENTO           "
 				       + "\n2 - TERRENO               "
 				       + "\n3 - CASA                  "
 				       + "\n4 - EDIFICIO COMERCIAL    "
 				       + "\nESCOLHA UMA OPÇÃO: ");			
-		int escolha = leitor.nextInt();	
+		int escolha = scanInt.nextInt();	
 		String tipo = new String();
 		switch(escolha){		    	    
         case 1 :
@@ -337,11 +338,11 @@ public class Model {
 		System.out.println("========IMOVEL CADASTRADO COM SUCESSO!========");
 		setIdProduto(getIdProduto()+1); 
 	}
-		
+ 
 	public boolean atualizarImovel() { 
 		System.out.println("========EDITAR IMOVEL========");
 		System.out.print("ID do produto: ");
-		int idProduto = leitor.nextInt();
+		int idProduto = scanInt.nextInt();
 		for (Imovel imovel : imoveis) {
 			if (imovel.getIdProduto() == idProduto) {
 				System.out.print("\nESCOLHA O CAMPO A SER ALTERADO:"
@@ -350,23 +351,23 @@ public class Model {
 							       + "\n3 - AREA"
 							       + "\n4 - TIPO"
 							      + "\nESCOLHA UMA OPÇÃO: ");			
-				int escolha = leitor.nextInt();	
+				int escolha = scanInt.nextInt();	
 				String tipo1 = new String();
 				switch(escolha){		    	    
 			    case 1 :
 			      	System.out.print("CEP DO IMOVEL: ");
-			  		String cep = leitor.nextLine();
+			  		String cep = scanString.nextLine();
 			  		imovel.setCep(cep);
 			  		System.out.print("CEP ATUALIZADO ");
 			    break;		        
 			    case 2 :
 			      	System.out.print("NUMERO DO IMÓVEL: ");
-			  		int numero = leitor.nextInt();
+			  		int numero = scanInt.nextInt();
 			  		imovel.setNumero(numero);
 			  		System.out.print("NUMERO ATUALIZADO ");
 			    break;
 			    case 3 :
-			      	float area = leitor.nextFloat();
+			      	float area = scanFloat.nextFloat();
 			  		System.out.print("AREA DO IMOVEL: ");
 			  		imovel.setArea(area);
 			  		System.out.print("AREA ATUALIZADA ");
@@ -378,7 +379,7 @@ public class Model {
 			    		       + "3 - CASA\n"
 			    		       + "4 - EDIFICIO COMERCIAL\n"
 			    		       + "ESCOLHA UMA OPÇÃO: ");			
-			    int escolha2 = leitor.nextInt();	
+			    int escolha2 = scanInt.nextInt();	
 			    String tipo = new String();
 			    switch(escolha2){		    	    
 			    case 1 :
@@ -405,12 +406,12 @@ public class Model {
 			System.out.print("IMOVEL NÃO ENCONTRADO\n");
 			return false;
 	}
-		 
-		 
+ 
+ 
 	public boolean deletarImovel() {
 		System.out.println("========DELETAR IMOVEL========");
 		System.out.print("Id Imovel: ");
-		int idProduto = leitor.nextInt();
+		int idProduto = scanInt.nextInt();
 		for (Imovel imovel : imoveis) {
 			if (idProduto==imovel.getIdProduto()) {	
 				imoveis.remove(imovel);
@@ -421,7 +422,7 @@ public class Model {
 		System.out.print("IMOVEL NÃO ENCONTRADO\n");
 		return false;
 	}	
-	
+ 
 	public void consultarImoveis() {
 		System.out.println("========LISTA DE IMÓVEIS========");
 		for (Imovel Imovel : imoveis) {
@@ -437,24 +438,24 @@ public class Model {
 		}
 		System.out.println("======================================");
 	}
-	
+ 
 //VEICULO@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	
+ 
 	public void cadastrarVeiculo() {		
 		System.out.println("========CADASTRO DE VEÍCULOS========");				
 		int id = idProduto;
 		System.out.print("LANCE MINIMO: ");
-		float lanceMinimo = leitor.nextFloat();		
+		float lanceMinimo = scanFloat.nextFloat();		
 		System.out.print("DESCRIÇÃO: ");
-		String desc = leitor.nextLine();		
+		String desc = scanString.nextLine();		
 		System.out.print("ID LEILÃO: ");
-		int idLeilao = leitor.nextInt();		
+		int idLeilao = scanInt.nextInt();		
 		System.out.print("ANO: ");
-		int ano = leitor.nextInt();		
+		int ano = scanInt.nextInt();		
 		System.out.print("MODELO: ");
-		String modelo = leitor.nextLine();		
+		String modelo = scanString.nextLine();		
 		System.out.print("COR: ");
-		String cor = leitor.nextLine();		
+		String cor = scanString.nextLine();		
 		System.out.print("\nTIPO: DIGITE UM NUMERO:     "
 				       + "\n1 - CARRO                "
 				       + "\n2 - MOTOCICLETA          "
@@ -462,7 +463,7 @@ public class Model {
 				       + "\n4 - PATINETE             "
 				       + "\n5 - SKATE                "
 				       + "\nESCOLHA UMA OPÇÃO: ");			
-		int escolha = leitor.nextInt();	
+		int escolha = scanInt.nextInt();	
 		String tipo = new String();
 		switch(escolha){		    	    
         case 1 :
@@ -486,7 +487,7 @@ public class Model {
 		System.out.println("========VEÍCULO CADASTRADO COM SUCESSO!========");		
 		idProduto += 1;
 	}
-	
+ 
 	public void consultarVeiculos() {
 		System.out.println("========LISTA DE VEÍCULOS========");
 		for (Veiculo Veiculo : veiculos) {
@@ -502,11 +503,11 @@ public class Model {
 		}
 		System.out.println("======================================");
 	}	
-	
+ 
 	  public boolean atualizarVeiculo() {
 		  System.out.println("========EDITAR VEÍCULO========");
 			System.out.print("Id do Veiculo: ");
-			int idProduto = leitor.nextInt();
+			int idProduto = scanInt.nextInt();
 			for (Veiculo veiculo : veiculos) {
 				if (veiculo.getIdProduto()==idProduto) {
 					System.out.print("\nESCOLHA O CAMPO A SER ALTERADO:"
@@ -515,23 +516,23 @@ public class Model {
 						       + "\n3 - COR"
 						       + "\n4 - TIPO"
 						       + "\nESCOLHA UMA OPÇÃO: ");			
-				int escolha = leitor.nextInt();	
+				int escolha = scanInt.nextInt();	
 				String tipo1 = new String();
 				switch(escolha){		    	    
 		      case 1 :
 		      	System.out.print("ANO DO VEÍCULO: ");
-		  		int ano = leitor.nextInt();
+		  		int ano = scanInt.nextInt();
 		  		veiculo.setAno(ano);
 		  		System.out.print("ANO ATUALIZADO ");
 		      break;		        
 		      case 2 :
 		      	System.out.print("MODELO DO VEÍCULO: ");
-		  		String modelo = leitor.nextLine();
+		  		String modelo = scanString.nextLine();
 		  		veiculo.setModelo(modelo);
 		  		System.out.print("MODELO ATUALIZADO ");
 		      break;
 		      case 3 :
-		      	String cor = leitor.nextLine();
+		      	String cor = scanString.nextLine();
 		  		System.out.print("COR DO VEÍCULO: ");
 		  		veiculo.setCor(cor);
 		  		System.out.print("COR ATUALIZADA ");
@@ -544,7 +545,7 @@ public class Model {
 					       + "4 - PATINETE\n"
 					       + "5 - SKATE\n"
 					       + "ESCOLHA UMA OPÇÃO: ");				
-		    	int escolha2 = leitor.nextInt();	
+		    	int escolha2 = scanInt.nextInt();	
 		    	String tipo = new String();
 		    	switch(escolha2){		    	    
 		    	case 1 :
@@ -571,16 +572,16 @@ public class Model {
 			    	}
 					return true;
 				}	
-				
+ 
 				}		
-			
+ 
 			System.out.print("VEÍCULO NÃO ENCONTRADO\n");
 			return false;
 		}
 	  public boolean deletarVeiculo() {
 			System.out.println("========DELETAR VEICULO========");
 			System.out.print("Id Veiculo: ");
-			int idProduto = leitor.nextInt();
+			int idProduto = scanInt.nextInt();
 			for (Veiculo veiculo : veiculos) {
 				if (idProduto==veiculo.getIdProduto()) {	
 					veiculos.remove(veiculo);
@@ -591,42 +592,42 @@ public class Model {
 			System.out.print("VEICULO NÃO ENCONTRADO\n");
 			return false;
 		}
-	  
-	
-	
+ 
+ 
+ 
 //LEILAO@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-	
+ 
 	public void cadastrarLeilao() throws ParseException {		
 		System.out.println("========CADASTRO DE LEILÕES========");	
 		int idLeilao = this.idLeilao;	
 		setIdLeilao(getIdLeilao()+1); 
 		System.out.print("Endereço: ");
-		String endereco = leitor.nextLine();
+		String endereco = scanString.nextLine();
 		System.out.print("Data Inicio (formato dd/MM/yyyy HH:mm:ss): ");
-		String data_inicio = leitor.nextLine();
+		String data_inicio = scanString.nextLine();
 		System.out.print("Data Fim (formato dd/MM/yyyy HH:mm:ss): ");
-		String data_fim = leitor.nextLine();
-		
+		String data_fim = scanString.nextLine();
+ 
 		//SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
+ 
 		Date data_inicio_Formatada = formato.parse(data_inicio); 
 		Date data_fim_Formatada = formato.parse(data_fim); 
-		
+ 
 		System.out.print("Banco: ");		
-		String banco = leitor.nextLine();
-		
+		String banco = scanString.nextLine();
+ 
 		Leilao leilao = new Leilao(idLeilao, data_inicio_Formatada, data_fim_Formatada, endereco, banco);
 		leiloes.add(leilao);		
 		System.out.println("========LEILÃO CADASTRADO COM SUCESSO!========");		
 	}
-	
+ 
 	public void consultarLeiloes() {
 		System.out.println("========LISTA DE LEILÕES========");
 		for (Leilao Leilao : leiloes) {
 			String data_inicio = formato.format(Leilao.getDataInicio()); 
 			String data_fim = formato.format(Leilao.getDataFim()); 
 			Date now_now = new Date();
-			
+ 
 			String status = "";
             if (now_now.after(Leilao.getDataFim())) {
          	   status = "Finalizado";
@@ -635,7 +636,7 @@ public class Model {
             } else {
             	status = "Aguardando Inicio";
             }
-			
+ 
 			System.out.println("======================================" +
 			                   "\nId Leilão: " + Leilao.getIdLeilao() + 
 			                   "\nData Inicio: " + data_inicio + 
@@ -646,11 +647,11 @@ public class Model {
 		}
 		System.out.println("======================================");
 	}
-	
+ 
 	public boolean atualizarLeilao() throws ParseException {
 			System.out.println("========EDITAR LEILÃO========");
 			System.out.print("ID do Leilão: ");
-			int idLeilao = leitor.nextInt();
+			int idLeilao = scanInt.nextInt();
 			for (Leilao leilao : leiloes) {
 				if (leilao.getIdLeilao() == idLeilao) {
 					System.out.print("\nESCOLHA O CAMPO A SER ALTERADO:"
@@ -659,20 +660,20 @@ public class Model {
 						       + "\n3 - BANCO"
 						       + "\n4 - DATA FIM"
 						       + "\nESCOLHA UMA OPÇÃO: ");			
-				int escolha = leitor.nextInt();	
+				int escolha = scanInt.nextInt();	
 				String tipo = new String();
 				switch(escolha){		    	    
 		        case 1 :
 		        	System.out.print("DATA: dd/MM/yyyy ");		
 		    		//SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-		    		String dataOcorrencia = leitor.nextLine();
+		    		String dataOcorrencia = scanString.nextLine();
 		    		Date dataFormatada = formato.parse(dataOcorrencia);
 		    		leilao.setDataInicio(dataFormatada);
 		    		System.out.print("DATA ATUALIZADA ");
 		        break;		        
 		        case 2 :
 		        	System.out.print("ENDEREÇO: ");
-		    		String endereco = leitor.nextLine();
+		    		String endereco = scanString.nextLine();
 		    		leilao.setEndereco(endereco);
 		    		System.out.print("ENDEREÇO DO LEILÃO ATUALIZADO ");
 		        break;
@@ -685,13 +686,13 @@ public class Model {
 		        */    
 		        case 3 :
 		        	System.out.print("BANCO: ");
-		    		String banco = leitor.nextLine();
+		    		String banco = scanString.nextLine();
 		    		leilao.setBanco(banco);
 		    		System.out.print("BANCO ATUALIZADO ");
 		        break;
 		        case 4 :
 		        	System.out.print("DATA: dd/MM/yyyy ");		
-		    		String dataOcorrencia2 = leitor.nextLine();
+		    		String dataOcorrencia2 = scanString.nextLine();
 		    		Date dataFormatada2 = formato.parse(dataOcorrencia2);
 		    		leilao.setDataFim(dataFormatada2);
 		    		System.out.print("DATA ATUALIZADA ");
@@ -703,11 +704,11 @@ public class Model {
 			System.out.print("LEILÃO NÃO ENCONTRADO\n");
 			return false;
 		}
-	
+ 
 	public boolean deletarLeilao() {
 		System.out.println("========DELETAR VEICULO========");
 		System.out.print("Id Veiculo: ");
-		int IdLeilao = leitor.nextInt();
+		int IdLeilao = scanInt.nextInt();
 		for (Leilao leilao : leiloes) {
 			if (idProduto==leilao.getIdLeilao()) {	
 				leiloes.remove(leilao);
@@ -719,6 +720,5 @@ public class Model {
 		return false;
 	}
 }
-
+ 
 //@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-

@@ -30,7 +30,7 @@ public class LeilaoApplication {
 							   "\n8 - Consultar Imoveis"+
 							   "\n9 - Consultar Veiculos"+
 							   "\n10 - Consultar Leilões"+
-							   "\n11 - Consultar Lances do Produto"+
+							   "\n11 - Consultar Lances por Produto"+
 							   "\n============EDITAR==============="+
 							   "\n12 - Editar Úsuario"+
 							   "\n13 - Editar Bancos"+
@@ -46,6 +46,7 @@ public class LeilaoApplication {
 							   "\n========FUNCIONALIDADES=========="+
 							   "\n22 - Filtrar Produto por Valor Min/Máx"+
 							   "\n23 - Checar Status do Leilão"+
+							   "\n24 - Cadastrar Lance"+
 							   "\n================================="+
 							   "\n99 - Sair"							   
 
@@ -122,6 +123,9 @@ public class LeilaoApplication {
 		        break;
 		        case 23:
 		        	model.checarStatusLeilao();
+		        break;
+		        case 24:
+		        	model.cadastrarLance();
 		        break;
 		        default:
 		        	System.out.print("\nOpção inválida.\n");
