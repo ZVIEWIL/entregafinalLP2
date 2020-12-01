@@ -50,7 +50,7 @@ public class Model {
 	static Scanner scanDouble = new Scanner (System.in);
 	SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
  
-	// funcionalidade 4
+	// funcionalidade 4a
 	public void filtrarMinMax() throws ParseException {
 		System.out.println("========PESQUISA POR VALOR MIN/MAX========");
 		System.out.print("Informe o ID do Leilão que deseja buscar: ");
@@ -94,6 +94,117 @@ public class Model {
 		}
 		System.out.print("Leilão não existe no sistema!\n");	
 	};
+	
+	// funcionalidade 4b
+	public void filtrarNomeProd() throws ParseException {
+		System.out.print("Informe o termo que deseja buscar: ");
+		String termo = scanString.nextLine();
+		for(Veiculo Veiculo : veiculos) {
+			if(Veiculo.getDesc().matches(".*"+termo+".*"))
+				System.out.println("======================================" +
+				           "\nId: " + Veiculo.getIdProduto()+ 
+						   "\nLance Mínimo: " + Veiculo.getLanceMinimo()+
+						   "\nDescrição: " + Veiculo.getDesc()+
+						   "\nId Leilão: " + Veiculo.getIdLeilao()+
+						   "\nAno: " + Veiculo.getAno()+
+						   "\nModelo: " + Veiculo.getModelo()+
+						   "\nCor: " + Veiculo.getCor()+
+						   "\nTipo: " + Veiculo.getTipo()
+						   );
+		}
+		for(Imovel Imovel : imoveis) {
+			if(Imovel.getDesc().matches(".*"+termo+".*")) {
+				System.out.println("======================================" +
+				           "\nId: " + Imovel.getIdProduto()+ 
+						   "\nLance Mínimo: " + Imovel.getLanceMinimo()+
+						   "\nDescrição: " + Imovel.getDesc()+
+						   "\nId Leilão: " + Imovel.getIdLeilao()+
+						   "\nCep: " + Imovel.getCep()+
+						   "\nNumero: " + Imovel.getNumero()+
+						   "\nArea: " + Imovel.getArea()+
+						   "\nTipo: " + Imovel.getTipo()
+						   );
+			}
+		}
+	}
+	
+	//funcionalidade 4c
+	public void filtrarTipo() throws ParseException {
+		System.out.println("======================================");
+		System.out.print("Informe o tipo que deseja procurar"
+		       + "\n1 - APARTAMENTO           "
+		       + "\n2 - TERRENO               "
+		       + "\n3 - CASA                  "
+		       + "\n4 - EDIFICIO COMERCIAL    "
+		       + "\n5 - CARRO                "
+		       + "\n6 - MOTOCICLETA          "
+		       + "\n7 - BICICLETA            "
+		       + "\n8 - PATINETE             "
+		       + "\n9 - SKATE                "
+		       + "\nESCOLHA UMA OPÇÃO: ");			
+				int escolha = scanInt.nextInt();	
+				String tipo = new String();
+				switch(escolha){		    	    
+					case 1 :
+						tipo = "APARTAMENTO";
+					break;		        
+					case 2 :
+						tipo = "TERRENO";
+					break;
+					case 3 :
+						tipo = "CASA";
+					break;    
+					case 4 :
+						tipo = "EDIFICIO COMERCIAL";
+					break;     	    
+			        case 5 :
+			        	tipo = "CARRO";
+			        break;		        
+			        case 6 :
+			        	tipo = "MOTOCICLETA";
+			        break;
+			        case 7 :
+			        	tipo = "BICICLETA";
+			        break;    
+			        case 8 :
+			        	tipo = "PATINETE";
+			        break; 
+			        case 9 :
+			        	tipo = "SKATE";
+			        break; 
+			        default:
+			        	System.out.print("\nOpção inválida.\n");
+			        break;
+				}
+				for(Veiculo Veiculo : veiculos) {
+					if(Veiculo.getTipo()== tipo)
+						System.out.println("======================================" +
+						           "\nId: " + Veiculo.getIdProduto()+ 
+								   "\nLance Mínimo: " + Veiculo.getLanceMinimo()+
+								   "\nDescrição: " + Veiculo.getDesc()+
+								   "\nId Leilão: " + Veiculo.getIdLeilao()+
+								   "\nAno: " + Veiculo.getAno()+
+								   "\nModelo: " + Veiculo.getModelo()+
+								   "\nCor: " + Veiculo.getCor()+
+								   "\nTipo: " + Veiculo.getTipo()
+								   );
+				}
+				for(Imovel Imovel : imoveis) {
+					if(Imovel.getTipo()== tipo) {
+						System.out.println("======================================" +
+						           "\nId: " + Imovel.getIdProduto()+ 
+								   "\nLance Mínimo: " + Imovel.getLanceMinimo()+
+								   "\nDescrição: " + Imovel.getDesc()+
+								   "\nId Leilão: " + Imovel.getIdLeilao()+
+								   "\nCep: " + Imovel.getCep()+
+								   "\nNumero: " + Imovel.getNumero()+
+								   "\nArea: " + Imovel.getArea()+
+								   "\nTipo: " + Imovel.getTipo()
+								   );
+					}
+				}
+		}
+	
  
 	// funcionalidade 5
 	public void cadastrarLance() throws ParseException {		

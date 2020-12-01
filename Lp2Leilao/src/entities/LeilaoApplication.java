@@ -47,6 +47,8 @@ public class LeilaoApplication {
 							   "\n22 - Filtrar Produto por Valor Min/Máx"+
 							   "\n23 - Checar Status do Leilão"+
 							   "\n24 - Cadastrar Lance"+
+							   "\n25 - Filtrar Produto por Termo"+
+							   "\n26 - Filtrar Tipo"+
 							   "\n================================="+
 							   "\n99 - Sair"							   
 
@@ -126,6 +128,12 @@ public class LeilaoApplication {
 		        break;
 		        case 24:
 		        	model.cadastrarLance();
+		        break;
+		        case 25:
+		        	model.filtrarNomeProd();
+		        break;
+		        case 26:
+		        	model.filtrarTipo();
 		        break;
 		        default:
 		        	System.out.print("\nOpção inválida.\n");
