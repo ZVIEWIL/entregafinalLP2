@@ -45,6 +45,7 @@ public class LeilaoApplication {
 							   "\n21 - Excluir Leilões"+
 							   "\n========FUNCIONALIDADES=========="+
 							   "\n22 - Filtrar Produto por Valor Min/Máx"+
+							   "\n23 - Checar Status do Leilão"+
 							   "\n================================="+
 							   "\n99 - Sair"							   
 
@@ -118,6 +119,9 @@ public class LeilaoApplication {
 		        break;
 		        case 22:
 		        	model.filtrarMinMax();
+		        break;
+		        case 23:
+		        	model.checarStatusLeilao();
 		        break;
 		        default:
 		        	System.out.print("\nOpção inválida.\n");

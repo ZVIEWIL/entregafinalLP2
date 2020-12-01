@@ -124,6 +124,29 @@ public class Model {
 		}
 	}
 
+	// funcionalidade 7
+	public void checarStatusLeilao() {
+		System.out.println("========CHECAR STATUS LEILÃO========");
+		System.out.print("Informe o ID do Leilão que deseja buscar: ");
+		int id_leilao = leitor.nextInt();
+		for (Leilao Leilao : leiloes) {
+			if(id_leilao == Leilao.getIdLeilao()) {
+				Date now_now = new Date();
+				
+				String status = "";
+		        if (now_now.after(Leilao.getDataFim())) {
+		     	   status = "Finalizado";
+		        } else if (now_now.after(Leilao.getDataInicio()) && now_now.before(Leilao.getDataFim())) {
+		        	status = "Em andamento";
+		        } else {
+		        	status = "Aguardando Inicio";
+		        }
+		        System.out.println("================\n Status:" +status + "\n================\n");
+		        return;
+			}
+		}
+		System.out.println("================\nLeilão não encontrado\n================\n");
+	}
 //CLIENTE@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 	
 	public void cadastrarCliente() {
