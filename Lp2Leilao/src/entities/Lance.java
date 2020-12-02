@@ -10,9 +10,9 @@ public class Lance {
 	String cpfPessoa;
 	int idLeilao;
 	int idProduto;
-	Double valor;	
+	float valor;	
 	
-	public Lance (int idLance, String cpfPessoa, int idLeilao, int idProduto, Double valor) {
+	public Lance (int idLance, String cpfPessoa, int idLeilao, int idProduto, float valor) {
 		setIdLance(idLance);
 		setCpfPessoa(cpfPessoa);		
 		setIdLeilao(idLeilao);

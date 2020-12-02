@@ -49,6 +49,7 @@ public class LeilaoApplication {
 							   "\n24 - Cadastrar Lance"+
 							   "\n25 - Filtrar Produto por Termo"+
 							   "\n26 - Filtrar Tipo"+
+							   "\n27 - Consultar Leilão Específico" +
 							   "\n================================="+
 							   "\n99 - Sair"							   
 
@@ -135,6 +136,9 @@ public class LeilaoApplication {
 		        case 26:
 		        	model.filtrarTipo();
 		        break;
+		        case 27:
+		        	model.consultarLeilaoEspecifico();
+	        	break;
 		        default:
 		        	System.out.print("\nOpção inválida.\n");
 		        break;

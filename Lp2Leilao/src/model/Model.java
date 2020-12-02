@@ -50,6 +50,76 @@ public class Model {
 	static Scanner scanDouble = new Scanner (System.in);
 	SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
  
+// FUNCIONALIDADES @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	// funcionalidade 2-3
+	public void consultarLeilaoEspecifico() {
+		System.out.println("========CONSULTE UM LEILAO ESPECÍFICO========");
+		System.out.print("ID do Leilão: ");
+		int idLeilao = scanString.nextInt();
+		int c = 0;
+		for (Leilao Leilao : leiloes) {
+			if (Leilao.getIdLeilao()==idLeilao) {
+				String data_inicio = formato.format(Leilao.getDataInicio()); 
+				String data_fim = formato.format(Leilao.getDataFim()); 
+				Date now_now = new Date();
+	 
+				String status = "";
+	            if (now_now.after(Leilao.getDataFim())) {
+	         	   status = "Finalizado";
+	            } else if (now_now.after(Leilao.getDataInicio()) && now_now.before(Leilao.getDataFim())) {
+	            	status = "Em andamento";
+	            } else {
+	            	status = "Aguardando Inicio";
+	            }
+	 
+				System.out.println("======================================" +
+				                   "\nId Leilão: " + Leilao.getIdLeilao() + 
+				                   "\nData Inicio: " + data_inicio + 
+				                   "\nData Fim: " + data_fim + 
+				                   "\nBanco: " + Leilao.getEndereco() +
+				                   "\nStatus: " + status
+				                   );
+		}
+				
+		for(Veiculo Veiculo : veiculos) {
+			if(idLeilao==Veiculo.getIdLeilao())
+				c += 1;
+				System.out.println("=================== Descrição Produto Veículo ===================" +
+				           "\nId Produto: " + Veiculo.getIdProduto()+ 
+				           "\nLance Mínimo: " + Veiculo.getLanceMinimo() +
+				           "\nDescrição: " + Veiculo.getDesc()+
+						   "\nAno: " + Veiculo.getAno()+
+						   "\nModelo: " + Veiculo.getModelo()+
+						   "\nCor: " + Veiculo.getCor()+
+						   "\nTipo: " + Veiculo.getTipo()
+						   );
+						  
+		}
+		for(Imovel Imovel : imoveis) {
+			if(idLeilao==Imovel.getIdLeilao()) {
+				c += 1;
+				System.out.println("=================== Descrição Produto Imovel ===================" +
+				           "\nId Produto: " + Imovel.getIdProduto()+ 
+						   "\nLance Mínimo: " + Imovel.getLanceMinimo()+
+						   "\nDescrição: " + Imovel.getDesc()+
+						   "\nCep: " + Imovel.getCep()+
+						   "\nNumero: " + Imovel.getNumero()+
+						   "\nArea: " + Imovel.getArea()+
+						   "\nTipo: " + Imovel.getTipo()
+						   );
+			}
+		}
+		System.out.println("================ Total de Produtos Leilão ===================");
+		System.out.println("Total de produtos: " + c);
+		System.out.println("======================================");
+		return;
+	}
+
+            System.out.print("Leilão não existe no sistema!\n");	
+
+		
+	}
+	
 	// funcionalidade 4a
 	public void filtrarMinMax() throws ParseException {
 		System.out.println("========PESQUISA POR VALOR MIN/MAX========");
@@ -207,21 +277,84 @@ public class Model {
 	
  
 	// funcionalidade 5
-	public void cadastrarLance() throws ParseException {		
-		System.out.println("========CADASTRO DE LANCE========");
-		int idLance = getIdLance();
-		System.out.print("cpfPessoa: ");
-		String cpfPessoa = scanString.nextLine();		
-		System.out.print("idLeilao: ");
-		int idLeilao = scanInt.nextInt();		
-		System.out.print("idProduto: ");
-		int idProduto = scanInt.nextInt();		
-		System.out.print("valor: ");
-		Double valor = scanDouble.nextDouble();		
-		lances.add(new Lance(idLance, cpfPessoa, idLeilao, idProduto, valor));
-		this.idLance = getIdLance()+1;
-		System.out.println("========LANCE CADASTRADO COM SUCESSO!========\n");		
-	}
+		public void cadastrarLance(){
+			Date diaDoLance = new Date();
+			formato.format(diaDoLance);
+			System.out.println("========CADASTRO DE LANCE========");		
+			System.out.print("Digite seu CPF: ");
+			String cpfPessoa = scanString.nextLine();
+			for(Cliente cliente : clientes) {
+				if (cpfPessoa.equals(cliente.getCpf())) {
+					System.out.print("Digite o Id do leilão: ");
+					int idLeilao = scanInt.nextInt();
+					for(Leilao leilao : leiloes) {
+						if(idLeilao == leilao.getIdLeilao() &&  
+						   diaDoLance.after(leilao.getDataInicio()) && 
+						   diaDoLance.before(leilao.getDataFim())) {
+							System.out.print("\nESCOLHA O TIPO DO PRODUTO:"
+								       + "\n1 - VEICULOS"
+								       + "\n2 - IMOVEIS"							       
+								       + "\nESCOLHA UMA OPÇÃO: ");			
+							int escolha = scanInt.nextInt();	
+							String tipo = new String();
+							switch(escolha){		    	    
+					        case 1 :
+					        	System.out.print("DIGITE O ID DO VEICULO: ");
+					    		int idProduto = scanInt.nextInt();
+					    		for(Veiculo veiculo : veiculos) {
+					    			if(idProduto==veiculo.idProduto) {
+					    				System.out.print("VALOR DO LANCE: ");
+					    				float valor = scanFloat.nextFloat();
+					    				if(valor>veiculo.lanceMinimo) {
+					    					veiculo.lanceMinimo = valor;
+					    					lances.add(new Lance(idLance, cpfPessoa, idLeilao, idProduto, valor));
+					    					this.idLance = getIdLance()+1;
+					    					System.out.println("========LANCE CADASTRADO COM SUCESSO!========\n");
+					    					return;
+					    				}
+					    				else {
+					    					System.out.println("Valor menor que o Lance Mínimo");
+					    					return;
+					    				}				    								    				
+					    			}				    			
+					    		}
+					    		System.out.println("Carro não encontrado!");
+					    		return;	
+	 
+					        case 2 :
+					        	System.out.print("DIGITE O ID DO IMOVEL: ");
+					    		int idProduto1 = scanInt.nextInt();
+					    		for(Imovel imovel : imoveis) {
+					    			if(idProduto1==imovel.idProduto) {
+					    				System.out.print("VALOR DO LANCE: ");
+					    				float valor = scanFloat.nextFloat();
+					    				if(valor>imovel.lanceMinimo) {
+					    					imovel.lanceMinimo = valor;
+					    					lances.add(new Lance(idLance, cpfPessoa, idLeilao, idProduto1, valor));
+					    					this.idLance = getIdLance()+1;
+					    					System.out.println("========LANCE CADASTRADO COM SUCESSO!========\n");
+					    					return;
+					    				}
+					    				else {
+					    					System.out.println("Valor menor que o Lance Mínimo");
+					    					return;
+					    				}				    								    				
+					    			}				    			
+					    		}
+					    		System.out.println("Imovel não encontrado!");
+					    		return;				    				        
+							}						
+						}				
+	 
+					}
+					System.out.println("Leilão não encontrado!");
+					return;
+				}			
+			}
+			System.out.println("Cliente não encontrado!");
+			return;
+		}
+	 
  
 	// funcionalidade 6
 	public void filtrarLancePorProduto() {
